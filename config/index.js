@@ -1,5 +1,6 @@
 module.exports = {
   workers: Number(process.env.WORKERS) || 1,
+  frequency: Number(process.env.FREQUENCY) || 60,
   discord: {
     webhookUrl: process.env.DISCORD_WEBHOOK_URL,
   },

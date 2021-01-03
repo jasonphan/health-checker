@@ -62,7 +62,7 @@ const errors = {};
     const webhookUrl = job.data.discord_webhook_url || config.discord.webhookUrl;
 
     await queue.createJob({ ...job.data })
-      .delayUntil(DateTime.local().plus({ seconds: 60 }).toMillis())
+      .delayUntil(DateTime.local().plus({ seconds: config.frequency }).toMillis())
       .save();
 
     if (!webhookUrl) {

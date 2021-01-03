@@ -16,7 +16,7 @@ touch jobs.json
 Configure `.env` and `jobs.json`.
 
 `jobs.example.json`
-```json
+```jsonc
 [
   {
     "target_status": "200",
