@@ -45,7 +45,10 @@ const errors = {};
     };
 
     try {
-      const { status } = await getHeaders(job.data.url);
+      const { status } = await getHeaders(job.data.url, {
+        followRedirects: job.data.follow_redirects || false,
+        basicAuth: job.data.basic_auth || {},
+      });
 
       result.response_status = status;
     } catch (error) {
@@ -59,10 +62,12 @@ const errors = {};
     console.log(result);
 
     const ok = result.response_status === result.target_status;
+
+    const frequency = Number(job.data.frequency) || config.frequency;
     const webhookUrl = job.data.discord_webhook_url || config.discord.webhookUrl;
 
     await queue.createJob({ ...job.data })
-      .delayUntil(DateTime.local().plus({ seconds: config.frequency }).toMillis())
+      .delayUntil(DateTime.local().plus({ seconds: frequency }).toMillis())
       .save();
 
     if (!webhookUrl) {
