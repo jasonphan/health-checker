@@ -31,6 +31,9 @@ Configure `.env` and `jobs.json`.
       "password": "password"
     },
 
+    // Maximum time for this health check request. Defaulted to 60s.
+    "max_time": 30,
+
     // How often a health check is performed in seconds,
     // adding this overrides frequency in .env.
     "frequency": 120,
@@ -46,4 +49,7 @@ Configure `.env` and `jobs.json`.
 
 ```bash
 node index.js
+
+# With PM2
+pm2 start index.js --name health-checker
 ```

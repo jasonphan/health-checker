@@ -48,6 +48,7 @@ const errors = {};
       const { status } = await getHeaders(job.data.url, {
         followRedirects: job.data.follow_redirects || false,
         basicAuth: job.data.basic_auth || {},
+        maxTime: job.data.max_time || 60,
       });
 
       result.response_status = status;

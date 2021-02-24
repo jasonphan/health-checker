@@ -8,6 +8,7 @@ const { spawn } = require('child_process');
  * @param {Object} options.basicAuth
  * @param {string} options.basicAuth.username
  * @param {string} options.basicAuth.password
+ * @param {number} options.maxTime
  * @returns {Promise<Object>} Promise of HTTP headers as an object.
  */
 const getHeaders = (
@@ -15,6 +16,7 @@ const getHeaders = (
   options = {
     followRedirects: false,
     basicAuth: {},
+    maxTime: 60,
   },
 ) => new Promise((resolve, reject) => {
   let headers = '';
@@ -28,6 +30,10 @@ const getHeaders = (
 
   if (options.basicAuth) {
     curlOptions.push('-u', `${options.basicAuth.username}:${options.basicAuth.password}`);
+  }
+
+  if (options.maxTime > 0) {
+    curlOptions.push('-m', String(options.maxTime));
   }
 
   curlOptions.push(url);
