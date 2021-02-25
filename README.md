@@ -53,3 +53,9 @@ node index.js
 # With PM2
 pm2 start index.js --name health-checker
 ```
+
+## Testing
+
+```bash
+npm run test
+```

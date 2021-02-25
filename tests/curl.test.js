@@ -74,11 +74,9 @@ describe('Basic authentication', () => {
 
 describe('Timeouts', () => {
   it('should timeout after 0.1s', async () => {
-    expect(async () => {
-      await getHeaders(`${url}/timeout`, { maxTime: 0.1 });
-    })
+    await expect(getHeaders(`${url}/timeout`, { maxTime: 0.1 }))
       .rejects
-      .toThrow();
+      .toThrow(/^curl: \(28\) Operation timed out/);
   });
 
   it('should return 200 after 1s', async () => {
